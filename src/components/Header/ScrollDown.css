@@ -20,9 +20,6 @@
     -ms-transform: rotate(45deg); /* IE 9 */
     -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
     transform: rotate(45deg);
-     
-    border-right: 2px solid #090029;
-    border-bottom: 2px solid #090029;
     margin: 0 0 3px 4px;
     
     width: 16px;

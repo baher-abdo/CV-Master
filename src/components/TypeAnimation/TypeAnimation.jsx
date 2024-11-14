@@ -4,18 +4,18 @@ export default function TypeEffict() {
     return (
         <TypeAnimation
         sequence={[
-          '',1000,
+          '',100,
           'Easy to use',
-          1300,
+          1900,
           'It is Amazing',
-          1300,
+          1900,
           'It is Truly Awesome!',
-          1300,
+          1900,
           'You Have to Try It!',
-          1300,
+          1900,
         ]}
-        speed={50}
-        style={{ fontSize: '2em' ,color:"#1966d2"}}
+        speed={70}
+        style={{ fontSize: '2em'}}
         repeat={Infinity}
       />
       );
