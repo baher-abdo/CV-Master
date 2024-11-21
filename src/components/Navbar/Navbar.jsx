@@ -23,7 +23,7 @@ export default function Navbar() {
       <AppBar position="fixed" sx={{ bgcolor: navColor.main, boxShadow: 1 }}>
 
       <Stack sx={{ width: '100%'}}>
-      <Alert severity="info" icon={false} sx={{padding:0,width:"100%"}}>The project is under development, thank you for your understanding ! 🚧</Alert>
+      <Alert severity="info" icon={false} sx={{padding:0,width:"100%" ,fontSize:{xs:"0.5em",md:"1em"}}}>The project is under development, thank you for your understanding ! 🚧</Alert>
         </Stack>
         
         <Toolbar variant="dense" sx={{justifyContent:"space-between"}}>

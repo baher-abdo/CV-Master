@@ -111,8 +111,8 @@ export default function AzureElegance() {
         </Grid>
       </Box>
       <Box>
-        <Grid container spacing={5} size={12} position={"relative"}>
           {/* work history */}
+        <Grid container spacing={5} size={12} position={"relative"}>
           <Grid size={7}>
             <Box sx={documentStyle.border}>
               <Box sx={{ display: "flex" }}>
@@ -132,10 +132,10 @@ export default function AzureElegance() {
                     >
                       {work.title}
                       <span style={{ fontWeight: "normal", marginLeft: "5px" }}>
-                        {`${dayjs(work.startDate).format("MMM/YYYY")} to ${
+                        {`${dayjs(work.startDate).format("MMM YYYY")} to ${
                           work.currently
                             ? "I currently work here"
-                            : dayjs(FormValues.endDate).format("MMM/YYYY")
+                            : dayjs(FormValues.endDate).format("MMM YYYY")
                         }`}
                       </span>
                     </Typography>

@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import React from "react";
+import React, { useContext } from "react";
+import { FormContext } from "../context/FormContext";
+import dayjs from "dayjs";
 
 const documentStyle = {
   mainColor: "#7243A1",
@@ -15,10 +17,17 @@ const documentStyle = {
 };
 
 export default function PurpleGrace() {
+  const { FormValues } = useContext(FormContext);
+
   return (
     <Box>
       <Box
-        sx={{ width: "100%",marginTop:3 ,paddingY: 1, bgcolor: documentStyle.mainColor }}
+        sx={{
+          width: "100%",
+          marginTop: 3,
+          paddingY: 1,
+          bgcolor: documentStyle.mainColor,
+        }}
       ></Box>
       {/* personal info */}
       <Box
@@ -32,18 +41,19 @@ export default function PurpleGrace() {
           color="#7243A1"
           fontWeight={"light"}
         >
-          baher abdo
+          {FormValues.firstName + " " + FormValues.lastName}
           {/* contact */}
         </Typography>
         <Typography fontSize={"0.7em"} variant="body2">
-          cairo, egypt
+          {FormValues.address}
         </Typography>
         <Typography fontSize={"0.7em"} variant="body2">
-          01288744169 | baherabdo1995@gmail.com
+          {FormValues.phone + " | " + FormValues.email}
         </Typography>
       </Box>
       {/* objective */}
       <Box
+        id="line"
         sx={{
           borderTop: `0.15em dotted ${documentStyle.mainColor}`,
           borderBottom: `0.15em dotted ${documentStyle.mainColor}`,
@@ -54,132 +64,96 @@ export default function PurpleGrace() {
           professional summary
         </Typography>
         <Typography fontSize={"0.7em"} variant="body2">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere sit
-          vero laboriosam repudiandae voluptate odit quae magni, consequatur
-          laudantium amet praesentium iusto. Eveniet quos alias voluptatum
-          fugiat incidunt libero reiciendis?
+          {FormValues.objective}
         </Typography>
       </Box>
       {/* work history */}
       <Box sx={documentStyle.spacing}>
         <Typography sx={documentStyle.mainTitles}>work history</Typography>
         <Box>
-          <Typography fontSize={"0.7em"} fontWeight={"medium"} variant="body2">
-            company
-          </Typography>
-          <Typography fontSize={"0.7em"} fontWeight={"normal"} variant="body2">
-            front end // address // march 2021 to febr 2024
-          </Typography>
-          <Typography
-            fontSize={"0.7em"}
-            ml={2}
-            fontWeight={"normal"}
-            variant="body2"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-            voluptas minima velit delectus incidunt tempore modi laborum esse
-            pariatur voluptates explicabo veniam soluta atque, illum cum eveniet
-            vel. Quos nisi, ex harum velit voluptates quae libero! Debitis
-            assumenda aliquam, beatae fuga, velit alias soluta impedit qui
-            quidem mollitia quod saepe?
-          </Typography>
-          <Typography fontSize={"0.7em"} fontWeight={"medium"} variant="body2">
-            company
-          </Typography>
-          <Typography fontSize={"0.7em"} fontWeight={"normal"} variant="body2">
-            front end // address // march 2021 to febr 2024
-          </Typography>
-          <Typography
-            fontSize={"0.7em"}
-            ml={2}
-            fontWeight={"normal"}
-            variant="body2"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-            voluptas minima velit delectus incidunt tempore modi laborum esse
-            pariatur voluptates explicabo veniam soluta atque, illum cum eveniet
-            vel. Quos nisi, ex harum velit voluptates quae libero! Debitis
-            assumenda aliquam, beatae fuga, velit alias soluta impedit qui
-            quidem mollitia quod saepe?
-          </Typography>
+          {FormValues.experience.map((work, index) => {
+            return (
+              <Box key={index}>
+                <Typography
+                  fontSize={"0.7em"}
+                  fontWeight={"bold"}
+                  variant="body2"
+                >
+                  {work.company}
+                </Typography>
+                <Typography
+                  fontSize={"0.7em"}
+                  fontWeight={"normal"}
+                  variant="body2"
+                >
+                  {/* {work.title + "//" + work.startDate + " " + `${work.currently ? work.currently : work.endDate }`} */}
+                  {work.title +
+                    " // " +
+                    `${dayjs(work.startDate).format("MMM YYYY")} to ${
+                      work.currently
+                        ? "I currently work here"
+                        : dayjs(FormValues.endDate).format("MMM YYYY")
+                    }`}
+                </Typography>
+                <Typography
+                  fontSize={"0.7em"}
+                  ml={2}
+                  fontWeight={"normal"}
+                  variant="body2"
+                >
+                  {work.work}
+                </Typography>
+              </Box>
+            );
+          })}
         </Box>
       </Box>
       {/* skills */}
       <Box sx={documentStyle.spacing}>
         <Typography sx={documentStyle.mainTitles}>skills</Typography>
         <Grid container ml={2}>
-          <Grid size={6}>
-            <Typography
-              fontSize={"0.7em"}
-              fontWeight={"normal"}
-              variant="body2"
-            >
-              baher
-            </Typography>
-          </Grid>
-          <Grid size={6}>
-            <Typography
-              fontSize={"0.7em"}
-              fontWeight={"normal"}
-              variant="body2"
-            >
-              baher
-            </Typography>
-          </Grid>
-          <Grid size={6}>
-            <Typography
-              fontSize={"0.7em"}
-              fontWeight={"normal"}
-              variant="body2"
-            >
-              baher
-            </Typography>
-          </Grid>
-          <Grid size={6}>
-            <Typography
-              fontSize={"0.7em"}
-              fontWeight={"normal"}
-              variant="body2"
-            >
-              baher
-            </Typography>
-          </Grid>
-          <Grid size={6}>
-            <Typography
-              fontSize={"0.7em"}
-              fontWeight={"normal"}
-              variant="body2"
-            >
-              baher
-            </Typography>
-          </Grid>
-          <Grid size={6}>
-            <Typography
-              fontSize={"0.7em"}
-              fontWeight={"normal"}
-              variant="body2"
-            >
-              baher
-            </Typography>
-          </Grid>
+          {FormValues.skills.map((skill, index) => {
+            return (
+              <Grid key={index} size={6}>
+                <Typography
+                  fontSize={"0.7em"}
+                  fontWeight={"normal"}
+                  variant="body2"
+                >
+                  {skill}
+                </Typography>
+              </Grid>
+            );
+          })}
         </Grid>
       </Box>
       {/* education */}
       <Box sx={documentStyle.spacing}>
         <Typography sx={documentStyle.mainTitles}>education</Typography>
         <Box>
-          <Typography fontSize={"0.7em"} variant="body2" fontWeight={"bold"}>
-            major
-          </Typography>
-          <Typography fontSize={"0.7em"} variant="body2" fontWeight={"normal"}>
-            university // mar 2024
-          </Typography>
-          <Typography fontSize={"0.7em"} variant="body2" fontWeight={"bold"}>
-            major
-          </Typography>
-          <Typography fontSize={"0.7em"} variant="body2" fontWeight={"normal"}>
-            university // mar 2024
-          </Typography>
+          {FormValues.education.map((education, index) => {
+            return (
+              <Box key={index}>
+                <Typography
+                  fontSize={"0.7em"}
+                  variant="body2"
+                  fontWeight={"bold"}
+                >
+                  {education.major}
+                </Typography>
+                <Typography
+                  ml={2}
+                  fontSize={"0.7em"}
+                  variant="body2"
+                  fontWeight={"normal"}
+                >
+                  {education.university +
+                    " // " +
+                    `${dayjs(education.graduationYear).format("MMM YYYY")}`}
+                </Typography>
+              </Box>
+            );
+          })}
         </Box>
       </Box>
       {/* certification */}
