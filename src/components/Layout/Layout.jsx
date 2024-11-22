@@ -6,6 +6,7 @@ import { grey, blue } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
+import { Box } from '@mui/material';
 
 export default function Layout() {
 
@@ -37,13 +38,13 @@ export default function Layout() {
   });
 
   return (
-    <div>
+    <Box>
           <ThemeProvider theme={theme}>
         <CssBaseline />
       <Navbar /> 
     <Outlet/>
       <Footer/>
     </ThemeProvider>
-    </div>
+    </Box>
   )
 }

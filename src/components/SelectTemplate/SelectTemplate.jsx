@@ -16,7 +16,7 @@ import { FormContext } from "../context/FormContext";
 
 export default function SelectTemplate() {
   const theme = useTheme();
-  const { setSelectedTemplate } = useContext(FormContext);
+  const { setSelectedTemplate, selectedTemplate } = useContext(FormContext);
 
   const templates = theme.palette;
 
@@ -100,7 +100,7 @@ export default function SelectTemplate() {
                     icon={false}
                     severity="info"
                   >
-                    {loading ? (
+                    {loading && selectedTemplate == "azure-elegance" ? (
                       <Box
                         sx={{
                           display: "flex",
@@ -161,7 +161,7 @@ export default function SelectTemplate() {
                     icon={false}
                     severity="info"
                   >
-                    {loading ? (
+                    {loading && selectedTemplate == "purple-grace" ? (
                       <Box
                         sx={{
                           display: "flex",
@@ -218,7 +218,7 @@ export default function SelectTemplate() {
                     icon={false}
                     severity="info"
                   >
-                    {loading ? (
+                    {loading && selectedTemplate == "standard-professional" ? (
                       <Box
                         sx={{
                           display: "flex",

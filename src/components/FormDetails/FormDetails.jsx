@@ -105,7 +105,6 @@ export default function FormDetails() {
                 size="small"
                 sx={{ marginY: 1 }}
               />
-
               <Field
                 fullWidth
                 variant="standard"
@@ -131,6 +130,7 @@ export default function FormDetails() {
                 variant="standard"
                 name="phone"
                 component={FormikTextField}
+                type="phone"
                 label="Phone"
                 size="small"
                 sx={{ marginY: 1 }}
@@ -540,6 +540,7 @@ export function FormikStepper({ children, ...props }) {
     } else {
       setStep((s) => s + 1);
       setActiveStep(step + 1);
+      window.scrollTo(0, 0);
     }
   }
 

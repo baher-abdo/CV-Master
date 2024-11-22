@@ -2,7 +2,7 @@ import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
 import ArticleIcon from "@mui/icons-material/Article";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -13,7 +13,9 @@ export default function Steps() {
   const steps = theme.palette;
 
   return (
-    <Box paddingX={{xs:1,md:3}}>
+    <Box id="steps" paddingX={{ xs: 1, md: 3 }}>
+      <Container maxWidth="xl">
+        
       <Grid container margin={0} paddingY={10} spacing={1}>
         <Grid size={12} paddingBottom={5} textAlign={"center"}>
           <Typography
@@ -151,6 +153,7 @@ export default function Steps() {
           </Grid>
         </Grid>
       </Grid>
+    </Container>
     </Box>
   );
 }

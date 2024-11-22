@@ -157,13 +157,13 @@ export default function PurpleGrace() {
         </Box>
       </Box>
       {/* certification */}
-      <Box sx={documentStyle.spacing}>
+      {/* <Box sx={documentStyle.spacing}>
         <Typography sx={documentStyle.mainTitles}>certification</Typography>
         <Typography fontSize={"0.7em"} variant="body2" fontWeight={"normal"}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum,
           veritatis.
         </Typography>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

@@ -13,14 +13,14 @@ export default function Steps(props) {
   const {activeStep} = props.value
 
   return (
-    <Box sx={{ width: '100%',mt:3 }}>
-      <Stepper activeStep={activeStep}>
+    <Box sx={{ width: '100%',mt:3}}>
+      <Stepper sx={{alignItems:"center"}} activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
           return (
-            <Step  key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+            <Step key={index} {...stepProps} >
+              <StepLabel sx={{flexDirection:"column"}} {...labelProps}>{label}</StepLabel>
             </Step>
           );
         })}

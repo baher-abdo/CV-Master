@@ -1,10 +1,8 @@
 import React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Button, Grid, Typography, useTheme } from "@mui/material";
+import { Grid, Typography, useTheme } from "@mui/material";
 import TypeEffict from "../TypeAnimation/TypeAnimation";
-import steps from "../Steps/Steps";
 import "./ScrollDown.css";
 
 export default function Header() {
@@ -34,9 +32,9 @@ export default function Header() {
                   textTransform: "capitalize",
                 }}
               >
-                create your professional CV in just 5{" "}
-                <Typography variant="span" color={header.header.span}>
-                  minutes!
+                create your professional CV in just
+                <Typography variant="span" ml={2} color={header.header.span}>
+                  5 minutes!
                 </Typography>
               </Typography>
               <Grid item color={header.header.span} sx={{ my: 2 }}>
@@ -45,7 +43,7 @@ export default function Header() {
             </Grid>
             <Grid item>
               <Box className="mouse_scroll">
-                <Box>
+                <a href="#steps">
                   <span
                     style={{
                       borderBottom: "2px solid" + header.titles.mainTitle,
@@ -67,7 +65,7 @@ export default function Header() {
                     }}
                     className="m_scroll_arrows trei"
                   ></span>
-                </Box>
+                </a>
               </Box>
             </Grid>
           </Grid>
