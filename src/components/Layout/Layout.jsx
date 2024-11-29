@@ -1,17 +1,18 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import Footer from '../Footer/Footer'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import { Outlet } from "react-router-dom";
 import { grey, blue } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
-import { Box } from '@mui/material';
+import { Box } from "@mui/material";
+import FormDetails from "../FormDetails/FormDetails";
 
 export default function Layout() {
-
-  {localStorage.getItem("mode") ? null : localStorage.setItem("mode","light")}
-
+  {
+    localStorage.getItem("mode") ? null : localStorage.setItem("mode", "light");
+  }
 
   const [mode, setMode] = useState(localStorage.getItem("mode"));
 
@@ -32,19 +33,19 @@ export default function Layout() {
         secondTitle: mode === "dark" ? grey[100] : grey[700],
       },
       icons: {
-        main: mode === "dark" ? grey[900]:"#fff",
-      }
+        main: mode === "dark" ? grey[900] : "#fff",
+      },
     },
   });
 
   return (
     <Box>
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
-      <Navbar /> 
-    <Outlet/>
-      <Footer/>
-    </ThemeProvider>
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </ThemeProvider>
     </Box>
-  )
+  );
 }

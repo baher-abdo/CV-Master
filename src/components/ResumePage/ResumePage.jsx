@@ -24,7 +24,6 @@ const ResumePage = () => {
     }
     window.addEventListener("popstate", () => {
       navigate("/form");
-      
     })
   }, []);
 

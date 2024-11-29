@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   TextField,
   Button,
@@ -8,35 +8,37 @@ import {
   Card,
   Box,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Field, Formik, FieldArray } from "formik";
-import Checkbox from "@mui/material/Checkbox";
+import { Formik } from "formik";
 import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { useContext } from "react";
 import { FormContext } from "../context/FormContext";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
-import Steps from "./Steps";
+import Steps from "./StepsBar";
+import StepOne from "./Steps/StepOne";
+import StepTwo from "./Steps/StepTwo";
+import StepThree from "./Steps/StepThree";
+import StepFour from "./Steps/StepFour";
 
-const currentYear = dayjs();
 export default function FormDetails() {
   const navigate = useNavigate();
   const { selectedTemplate } = useContext(FormContext);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (selectedTemplate === null) {
-      navigate("/");
-    }
-  }, []);
+
+  const stepOne = useMemo(() => {
+    return <StepOne />;
+  });
+  const stepTwo = useMemo(() => {
+    return <StepTwo />;
+  });
+  const stepThree = useMemo(() => {
+    return <StepThree />;
+  });
+  const stepFour = useMemo(() => {
+    return <StepFour />;
+  });
 
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First name is required"),
@@ -67,6 +69,12 @@ export default function FormDetails() {
     ),
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (selectedTemplate === null) {
+      navigate("/");
+    }
+  }, []);
   return (
     <Container sx={{ marginY: 8 }}>
       <Card>
@@ -94,401 +102,13 @@ export default function FormDetails() {
             }}
             // validationSchema={validationSchema}
           >
-            {/* step 1 */}
-            <Box paddingX={{ xs: 0, md: 5 }} paddingBottom={{ xs: 5 }}>
-              <Field
-                fullWidth
-                variant="standard"
-                name="firstName"
-                component={FormikTextField}
-                label="First Name"
-                size="small"
-                sx={{ marginY: 1 }}
-              />
-              <Field
-                fullWidth
-                variant="standard"
-                name="lastName"
-                component={FormikTextField}
-                label="Last Name"
-                size="small"
-                sx={{ marginY: 1 }}
-              />
+            {stepOne}
 
-              <Field
-                fullWidth
-                variant="standard"
-                name="address"
-                component={FormikTextField}
-                label="Address"
-                size="small"
-                sx={{ marginY: 1 }}
-              />
+            {stepTwo}
 
-              <Field
-                fullWidth
-                variant="standard"
-                name="phone"
-                component={FormikTextField}
-                type="phone"
-                label="Phone"
-                size="small"
-                sx={{ marginY: 1 }}
-              />
+            {stepThree}
 
-              <Field
-                fullWidth
-                variant="standard"
-                name="email"
-                component={FormikTextField}
-                label="Email"
-                size="small"
-                sx={{ marginY: 1 }}
-              />
-              <Field
-                fullWidth
-                variant="standard"
-                name="objective"
-                component={FormikTextField}
-                label="Personal Summary"
-                multiline
-                rows={4}
-                sx={{ marginY: 1 }}
-              />
-            </Box>
-
-            {/* step 2 */}
-            <Box paddingX={{ xs: 0, md: 5 }} paddingBottom={{ xs: 5 }}>
-              <FieldArray name="skills">
-                {(FieldArrayProps) => {
-                  const { form, push, remove } = FieldArrayProps;
-                  const { values } = form;
-                  const { skills } = values;
-                  return (
-                    <>
-                      {skills.map((skill, index) => {
-                        return (
-                          <Box key={index} my={1}>
-                            <Grid
-                              container
-                              columnSpacing={2}
-                              flexWrap={"wrap-reverse"}
-                              alignItems={"end"}
-                              padding={1}
-                              sx={{
-                                border: "1px #777 dashed",
-                                borderRadius: 2,
-                              }}
-                            >
-                              <Grid
-                                size={{ xs: 12, lg: 2 }}
-                                textAlign={"start"}
-                                mt={1}
-                              >
-                                <ButtonGroup>
-                                  <Button
-                                    disabled={skills.length < 2}
-                                    type="button"
-                                    size="small"
-                                    onClick={() => remove(index)}
-                                    variant="outlined"
-                                    startIcon={<DeleteIcon />}
-                                    color="error"
-                                  >
-                                    Delete
-                                  </Button>
-                                  <Button
-                                    type="button"
-                                    size="small"
-                                    onClick={() => {
-                                      push("");
-                                    }}
-                                    variant="contained"
-                                    endIcon={<AddIcon />}
-                                  >
-                                    Add
-                                  </Button>
-                                </ButtonGroup>
-                              </Grid>
-                              <Grid size={{ xs: 12, lg: 10 }}>
-                                <Field
-                                  fullWidth
-                                  variant="standard"
-                                  name={`skills[${index}]`}
-                                  component={FormikTextField}
-                                  label={`skill ${index + 1}`}
-                                  size="small"
-                                />
-                              </Grid>
-                            </Grid>
-                          </Box>
-                        );
-                      })}
-                    </>
-                  );
-                }}
-              </FieldArray>
-            </Box>
-
-            {/* step 3 */}
-            <Box paddingX={{ xs: 0, md: 5 }} paddingBottom={{ xs: 5 }}>
-              <FieldArray name="experience">
-                {(FieldArrayProps) => {
-                  const { form, push, remove } = FieldArrayProps;
-                  const { values } = form;
-                  const { experience } = values;
-                  return (
-                    <>
-                      {experience.map((work, index) => {
-                        return (
-                          <Box
-                            key={index}
-                            my={1}
-                            padding={1}
-                            sx={{ border: "1px #777 dashed", borderRadius: 2 }}
-                          >
-                            <Grid
-                              container
-                              justifyContent={"space-between"}
-                              flexWrap={"wrap-reverse"}
-                            >
-                              <Grid container spacing={2}>
-                                <Grid size={{ xs: 12, md: 6 }}>
-                                  <Field
-                                    fullWidth
-                                    variant="standard"
-                                    name={`experience[${index}].company`}
-                                    component={FormikTextField}
-                                    label={`Company`}
-                                    size="small"
-                                  />
-                                </Grid>
-                                <Grid size={{ xs: 12, md: 6 }}>
-                                  <Field
-                                    fullWidth
-                                    variant="standard"
-                                    name={`experience[${index}].title`}
-                                    component={FormikTextField}
-                                    label={`Title`}
-                                    size="small"
-                                  />
-                                </Grid>
-                                <Box textAlign={"start"}>
-                                  <LocalizationProvider
-                                    dateAdapter={AdapterDayjs}
-                                  >
-                                    <Grid container gap={2}>
-                                      <Grid>
-                                        <DatePicker
-                                          onChange={(value) =>
-                                            form.setFieldValue(
-                                              `experience[${index}].startDate`,
-                                              value.$d
-                                            )
-                                          }
-                                          label="Start date"
-                                          maxDate={currentYear}
-                                          openTo="year"
-                                          views={["year", "month"]}
-                                          yearsOrder="desc"
-                                          sx={{ minWidth: 250 }}
-                                        />
-                                      </Grid>
-                                      <Grid>
-                                        <DatePicker
-                                          onChange={(value) =>
-                                            form.setFieldValue(
-                                              `experience[${index}].endDate`,
-                                              value.$d
-                                            )
-                                          }
-                                          label="End date"
-                                          maxDate={currentYear}
-                                          openTo="year"
-                                          views={["year", "month"]}
-                                          yearsOrder="desc"
-                                          sx={{ minWidth: 250 }}
-                                          disabled={experience[index].currently}
-                                        />
-                                      </Grid>
-                                      <Grid>
-                                        <FormControlLabel
-                                          control={
-                                            <Checkbox
-                                              checked={
-                                                form.values.experience[index]
-                                                  .currently
-                                              }
-                                              onChange={(event) =>
-                                                form.setFieldValue(
-                                                  `experience[${index}].currently`,
-                                                  event.target.checked
-                                                )
-                                              }
-                                            />
-                                          }
-                                          label="I currently work here"
-                                          name={`experience[${index}].currently`}
-                                        />
-                                      </Grid>
-                                    </Grid>
-                                  </LocalizationProvider>
-                                </Box>
-                              </Grid>
-                            </Grid>
-                            <Field
-                              fullWidth
-                              variant="standard"
-                              name={`experience[${index}].work`}
-                              component={FormikTextField}
-                              label="Work Description"
-                              multiline
-                              rows={3}
-                              sx={{ mt: 1 }}
-                            />
-                            <ButtonGroup sx={{ width: "100%", mt: 1 }}>
-                              <Button
-                                disabled={experience.length < 2}
-                                type="button"
-                                size="small"
-                                onClick={() => remove(index)}
-                                variant="outlined"
-                                color="error"
-                                startIcon={<DeleteIcon />}
-                              >
-                                Delete
-                              </Button>
-                              <Button
-                                type="button"
-                                size="small"
-                                onClick={() => {
-                                  push({
-                                    company: "",
-                                    startDate: "",
-                                    endDate: "",
-                                    currently: false,
-                                    title: "",
-                                    work: [""],
-                                  });
-                                }}
-                                variant="contained"
-                                endIcon={<AddIcon />}
-                              >
-                                Add
-                              </Button>
-                            </ButtonGroup>
-                          </Box>
-                        );
-                      })}
-                    </>
-                  );
-                }}
-              </FieldArray>
-            </Box>
-
-            {/* step 4 */}
-            <Box paddingX={{ xs: 0, md: 5 }} paddingBottom={{ xs: 5 }}>
-              <FieldArray name="education">
-                {(FieldArrayProps) => {
-                  const { form, push, remove } = FieldArrayProps;
-                  const { values } = form;
-                  const { education } = values;
-                  return (
-                    <>
-                      {education.map((university, index) => {
-                        return (
-                          <Box
-                            key={index}
-                            my={1}
-                            padding={1}
-                            sx={{ border: "1px #777 dashed", borderRadius: 2 }}
-                          >
-                            <Grid
-                              container
-                              alignItems={"end"}
-                              spacing={1}
-                              mb={1}
-                            >
-                              <Grid size={{ xs: 12, md: 4 }}>
-                                <Field
-                                  fullWidth
-                                  variant="standard"
-                                  name={`education[${index}].university`}
-                                  component={FormikTextField}
-                                  label={`University`}
-                                  size="small"
-                                />
-                              </Grid>
-                              <Grid size={{ xs: 12, md: 4 }}>
-                                <Field
-                                  fullWidth
-                                  variant="standard"
-                                  name={`education[${index}].major`}
-                                  component={FormikTextField}
-                                  label={`Major`}
-                                  size="small"
-                                />
-                              </Grid>
-                              <Grid size={{ xs: 12, md: 4 }}>
-                                <LocalizationProvider
-                                  dateAdapter={AdapterDayjs}
-                                >
-                                  <Grid container gap={2}>
-                                    <Grid>
-                                      <DatePicker
-                                        onChange={(value) =>
-                                          form.setFieldValue(
-                                            `education[${index}].graduationYear`,
-                                            value.$d
-                                          )
-                                        }
-                                        label="Graduation Year"
-                                        maxDate={currentYear}
-                                        views={["year"]}
-                                        yearsOrder="desc"
-                                        sx={{ minWidth: 250 }}
-                                      />
-                                    </Grid>
-                                  </Grid>
-                                </LocalizationProvider>
-                              </Grid>
-                            </Grid>
-                            <ButtonGroup sx={{ width: "100%" }}>
-                              <Button
-                                disabled={education.length < 2}
-                                color="error"
-                                type="button"
-                                size="small"
-                                onClick={() => remove(index)}
-                                variant="outlined"
-                                startIcon={<DeleteIcon />}
-                              >
-                                Delete
-                              </Button>
-                              <Button
-                                type="button"
-                                size="small"
-                                onClick={() => {
-                                  push({
-                                    university: "",
-                                    major: "",
-                                    graduationYear: "",
-                                  });
-                                }}
-                                variant="contained"
-                                endIcon={<AddIcon />}
-                              >
-                                Add
-                              </Button>
-                            </ButtonGroup>
-                          </Box>
-                        );
-                      })}
-                    </>
-                  );
-                }}
-              </FieldArray>
-            </Box>
+            {stepFour}
           </FormikStepper>
         </CardContent>
       </Card>
@@ -496,7 +116,9 @@ export default function FormDetails() {
   );
 }
 
-function FormikTextField({ field, form, ...props }) {
+export const currentYear = dayjs();
+
+export function FormikTextField({ field, form, ...props }) {
   return (
     <TextField
       {...field}

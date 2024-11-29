@@ -62,7 +62,11 @@ export default function StandardProfessional() {
           >
             <Grid2 container>
               {FormValues.skills.map((skill, index) => {
-                return <Grid2 size={6}>{skill}</Grid2>;
+                return (
+                  <Grid2 key={index} size={6}>
+                    {skill}
+                  </Grid2>
+                );
               })}
             </Grid2>
           </Typography>
