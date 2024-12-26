@@ -1,0 +1,36 @@
+/* ResumePage.css */
+
+.resume-container {
+    width: 148mm;
+    min-height: 210mm;
+    margin: auto;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: black;
+  }
+  
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+  
+    .resume-container,
+    .resume-container * {
+      visibility: visible;
+    }
+  
+    .resume-container {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+  }
+  .section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .page-break {
+    page-break-after: always;
+  }  
