@@ -31,4 +31,4 @@ This project is still in progress and several features are being actively worked
    ```bash
    git clone https://github.com/username/cv-master.git
 ### Live Demo
-https://cv-master.vercel.app/
+https://cv-master-xi.vercel.app/

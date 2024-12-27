@@ -50,28 +50,28 @@ export default function FormDetails() {
     lastName: Yup.string().required("Last name is required"),
     address: Yup.string().required("Address is required"),
     phone: Yup.string()
-      .matches(/^[0-9]{10}$/, "Phone number must be 10 digits")
-      .required("Phone number is required"),
+      .matches(/^01[0125][0-9]{8}$/, "invalid Phone")
+      .required("phone is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
     objective: Yup.string().required("Personal summary is required"),
-    skills: Yup.array().of(Yup.string().required("Skill is required")),
-    experience: Yup.array().of(
-      Yup.object({
-        company: Yup.string().required("Company name is required"),
-        startDate: Yup.date().required("Start date is required"),
-        title: Yup.string().required("Job title is required"),
-        work: Yup.string().required("Work description is required"),
-      })
-    ),
-    education: Yup.array().of(
-      Yup.object({
-        university: Yup.string().required("University name is required"),
-        major: Yup.string().required("Major is required"),
-        graduationYear: Yup.date().required("Graduation year is required"),
-      })
-    ),
+    // skills: Yup.array().of(Yup.string().required("Skill is required")),
+    // experience: Yup.array().of(
+    //   Yup.object({
+    //     company: Yup.string().required("Company name is required"),
+    //     startDate: Yup.date().required("Start date is required"),
+    //     title: Yup.string().required("Job title is required"),
+    //     work: Yup.string().required("Work description is required"),
+    //   })
+    // ),
+    // education: Yup.array().of(
+    //   Yup.object({
+    //     university: Yup.string().required("University name is required"),
+    //     major: Yup.string().required("Major is required"),
+    //     graduationYear: Yup.date().required("Graduation year is required"),
+    //   })
+    // ),
   });
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function FormDetails() {
               ],
               education: [{ university: "", major: "", graduationYear: "" }],
             }}
-            // validationSchema={validationSchema}
+            validationSchema={validationSchema}
             validateOnChange={false}
             validateOnBlur={false}
           >

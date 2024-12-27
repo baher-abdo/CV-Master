@@ -40,7 +40,7 @@ export default function StepOne() {
       variant="standard"
       name="phone"
       component={FormikTextField}
-      type="phone"
+      type="tel"
       label="Phone"
       size="small"
       sx={{ marginY: 1 }}
