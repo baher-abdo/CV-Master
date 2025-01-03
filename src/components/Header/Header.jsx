@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { Grid, Typography, useTheme } from "@mui/material";
 import TypeEffict from "../TypeAnimation/TypeAnimation";
+import bgImage from "../../assets/images/graphic_dots_2.png";
 import "./ScrollDown.css";
 
 export default function Header() {
@@ -12,7 +13,7 @@ export default function Header() {
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ bgcolor: header.header.main }}>
+      <Container maxWidth="xl" sx={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
         <Box
           sx={{
             height: "100vh",
